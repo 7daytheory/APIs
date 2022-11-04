@@ -13,9 +13,18 @@ const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&l
 
 app.get("/", (req, res) => {
   https.get(weatherURL, (response) => {
-    console.log(response)
+    console.log(response.statusCode)
+
+    response.on("data", (data) => {
+      const weatherData = JSON.parse(data);
+      console.log(weatherData);
+      const weatherTemp = weatherData.main.temp + "(Seriously?)";
+      const weatherDesc = weatherData.weather[0].description;
+
+      console.log("Temperature " + weatherTemp + " with " + weatherDesc);
+    })
   })
-  res.send(weatherURL);
+  res.send("View console log for weather data(for now)");
 })
 
 app.listen(port, () => {
