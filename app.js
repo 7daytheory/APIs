@@ -12,7 +12,9 @@ const apiKey = 'aaf8ff4104d2f272e069a0be058e3533';
 const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
 app.get("/", (req, res) => {
-  //https.get(weatherURL)
+  https.get(weatherURL, (response) => {
+    console.log(response)
+  })
   res.send(weatherURL);
 })
 
